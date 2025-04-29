@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">ForInvest-Crypto</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!--onboarding-->
+    <string name="onboarding_title_1">Take hold of your finances</string>
+    <string name="onboarding_description_1">Learn how to invest in cryptocurrency and start trading.</string>
+    <string name="onboarding_title_2">Secure Your Investment</string>
+    <string name="onboarding_description_2">Learn about crypto security and how to protect your assets.</string>
+    <string name="next">Next</string>
+    <string name="get_started">Get Started</string>
+    <string name="home">Home</string>
+    <string name="News">News</string>
+    <string name="Favorites">Favorites</string>
+    <string name="Wallet">Wallet</string>
+    <string name="Search">Search</string>
+    <string name="crypto_app">Crypto App</string>
+    <string name="logo">Logo</string>
+    <string name="featured_coins">Today\'s Top 5 Coins</string>
 </resources>

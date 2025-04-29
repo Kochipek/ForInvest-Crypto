@@ -99,6 +99,8 @@ dependencies {
     implementation(libs.hilt.android)
     implementation(libs.androidx.navigation.runtime.ktx)
     implementation(libs.androidx.paging.runtime.ktx)
+
+    implementation(libs.androidx.navigation.fragment)
     ksp(libs.hilt.android.compiler)
 
     //roomdb
