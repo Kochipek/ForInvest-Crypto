@@ -10,6 +10,8 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.ipekkochisarli.forinvest_crypto.R
 import com.ipekkochisarli.forinvest_crypto.databinding.ActivityMainBinding
+import com.ipekkochisarli.forinvest_crypto.util.extensions.gone
+import com.ipekkochisarli.forinvest_crypto.util.extensions.visible
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -35,5 +37,24 @@ class MainActivity : AppCompatActivity() {
 
         // setup bottom navigation
         binding.bottomNav.setupWithNavController(navController)
+
+        binding.ivProfile.setOnClickListener {
+            navController.navigate(R.id.profileFragment)
+        }
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.profileFragment,
+                R.id.onBoardingFragment -> {
+                    binding.bottomNav.gone()
+                    binding.toolbar.gone()
+                }
+                else -> {
+                    binding.bottomNav.visible()
+                    binding.toolbar.visible()
+                }
+            }
+        }
+
     }
 }
