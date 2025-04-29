@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/bg_coin_container"
+    android:padding="12dp"
+    android:layout_margin="8dp"
+    android:backgroundTintMode="src_in">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/coinIcon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/coinName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Bitcoin"
+        android:fontFamily="@font/readexpro_semibold"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/coinIcon"
+        app:layout_constraintTop_toTopOf="@id/coinIcon"
+        app:layout_constraintBottom_toTopOf="@id/coinSymbol"
+        android:layout_marginStart="12dp"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/coinSymbol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="BTC"
+        android:textColor="@color/dark_secondary"
+        android:fontFamily="@font/readexpro_bold"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@id/coinName"
+        app:layout_constraintTop_toBottomOf="@id/coinName"
+        android:layout_marginTop="2dp"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/coinPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="$1,270.10"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/coinName"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/coinChange"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="4dp"
+        tools:text="+2.76%"
+        android:fontFamily="@font/readexpro_bold"
+        android:textColor="@color/green"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/coinPrice" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

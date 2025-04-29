@@ -21,7 +21,7 @@
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.ipekkochisarli.forinvest_crypto.features.home.HomeFragment"
+        android:name="com.ipekkochisarli.forinvest_crypto.features.home.presentation.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
     <fragment
