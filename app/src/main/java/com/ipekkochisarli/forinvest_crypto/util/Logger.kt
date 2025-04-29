@@ -1,6 +1,7 @@
 package com.ipekkochisarli.forinvest_crypto.util
 
 import android.util.Log
+import com.ipekkochisarli.forinvest_crypto.BuildConfig
 
 const val LOG_TAG = "crypto-app-logger"
 

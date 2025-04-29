@@ -1,5 +1,6 @@
 package com.ipekkochisarli.forinvest_crypto.core.di
 
+import com.ipekkochisarli.forinvest_crypto.BuildConfig
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
