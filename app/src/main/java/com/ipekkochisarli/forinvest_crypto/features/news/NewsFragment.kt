@@ -1,4 +1,4 @@
-package com.ipekkochisarli.forinvest_crypto.features.home
+package com.ipekkochisarli.forinvest_crypto.features.news
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,14 +7,16 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.ipekkochisarli.forinvest_crypto.R
 import com.ipekkochisarli.forinvest_crypto.core.base.BaseFragment
-import com.ipekkochisarli.forinvest_crypto.databinding.FragmentHomeBinding
+import com.ipekkochisarli.forinvest_crypto.databinding.FragmentNewsBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
+class NewsFragment : BaseFragment<FragmentNewsBinding>(FragmentNewsBinding::inflate) {
 
-class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        return inflater.inflate(R.layout.fragment_news, container, false)
     }
 }
