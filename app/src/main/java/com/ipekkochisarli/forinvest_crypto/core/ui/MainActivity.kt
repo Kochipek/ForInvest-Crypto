@@ -7,6 +7,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import com.ipekkochisarli.forinvest_crypto.R
 import com.ipekkochisarli.forinvest_crypto.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,8 +28,12 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
         navController = navHostFragment.navController
+
+        // setup bottom navigation
+        binding.bottomNav.setupWithNavController(navController)
     }
 }
