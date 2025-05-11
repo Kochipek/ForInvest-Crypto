@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.navOptions
 import androidx.viewpager2.widget.ViewPager2
 import com.ipekkochisarli.forinvest_crypto.R
 import com.ipekkochisarli.forinvest_crypto.core.base.BaseFragment
@@ -36,9 +37,8 @@ class OnBoardingFragment : BaseFragment<FragmentOnboardingBinding>(FragmentOnboa
         setupOnboardingAdapter()
 
         if (preferences.isOnBoardingFinished()) {
-            findNavController().navigate(R.id.action_onBoardingFragment_to_homeFragment)
+            navigateToHomeScreen()
         }
-
         return binding.root
     }
 
@@ -74,7 +74,7 @@ class OnBoardingFragment : BaseFragment<FragmentOnboardingBinding>(FragmentOnboa
 
         if (currentItem == lastIndex) {
             markOnBoardingAsFinished()
-            findNavController().navigate(R.id.action_onBoardingFragment_to_homeFragment)
+            navigateToHomeScreen()
         } else {
             viewPager.currentItem = currentItem + 1
         }
@@ -83,4 +83,13 @@ class OnBoardingFragment : BaseFragment<FragmentOnboardingBinding>(FragmentOnboa
     private fun markOnBoardingAsFinished() {
         preferences.setOnBoardingFinished(true)
     }
+
+    private fun navigateToHomeScreen(){
+        findNavController().navigate(R.id.action_onBoardingFragment_to_homeFragment, null,
+            navOptions {
+                popUpTo(R.id.onBoardingFragment) {
+                    inclusive = true
+                }})
+    }
+
 }
