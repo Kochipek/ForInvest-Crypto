@@ -38,45 +38,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="30,113.80"
+            android:paddingTop="10dp"
             android:textColor="@color/white"
             android:textSize="16sp"
             app:layout_constraintTop_toBottomOf="@id/coinPair"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="8dp"/>
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/coinChange"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="+2.76%"
-            android:fontFamily="@font/readexpro_bold"
-            android:textColor="@color/green"
-            android:textSize="14sp"
-            app:layout_constraintTop_toBottomOf="@id/coinPrice"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="4dp"/>
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/volumeLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="24H Vol."
-            android:textColor="@color/dark_secondary"
-            android:textSize="12sp"
-            app:layout_constraintTop_toBottomOf="@id/coinChange"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="12dp"/>
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/coinVolume"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="394 897 432,26"
-            android:textColor="@color/dark_secondary"
-            android:textSize="14sp"
-            app:layout_constraintTop_toBottomOf="@id/volumeLabel"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="2dp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

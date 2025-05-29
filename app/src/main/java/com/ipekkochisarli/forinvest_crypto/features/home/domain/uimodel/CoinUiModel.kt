@@ -29,3 +29,17 @@ data class CoinUiModel(
     val totalSupply: Double? = null,
     val totalVolume: Long? = null
 )
+
+data class TrendingCoinUiModel(
+    val id: String,
+    val coinId: Int,
+    val name: String,
+    val symbol: String,
+    val marketCapRank: String,
+    val thumb: String,
+    val small: String,
+    val large: String,
+    val slug: String,
+    val score: Int,
+    val priceBtc: Double
+)
