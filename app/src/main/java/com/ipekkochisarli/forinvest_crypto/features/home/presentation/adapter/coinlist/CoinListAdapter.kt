@@ -9,8 +9,12 @@ import com.ipekkochisarli.forinvest_crypto.features.home.domain.uimodel.CoinUiMo
 import javax.inject.Inject
 
 class CoinListAdapter @Inject constructor(): BaseListAdapter<CoinUiModel>(
-    itemsSame = { oldItem, newItem -> oldItem == newItem },
-    contentsSame = { oldItem, newItem -> oldItem == newItem }) {
+    itemsSame = { oldItem, newItem -> oldItem.id == newItem.id },
+    contentsSame = { oldItem, newItem ->
+        oldItem.currentPrice == newItem.currentPrice &&
+                oldItem.priceChangePercentage24h == newItem.priceChangePercentage24h
+    }
+) {
     override fun onCreateViewHolder(parent: ViewGroup, inflater: LayoutInflater, viewType: Int): CoinListViewHolder {
         val view = inflater.inflate(R.layout.list_item_coins, parent, false)
         return CoinListViewHolder(view)
