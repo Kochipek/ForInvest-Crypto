@@ -24,8 +24,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
         setupRecyclerViews()
         collectPageState()
-        viewModel.getData()
-
     }
 
     private fun collectPageState() {
