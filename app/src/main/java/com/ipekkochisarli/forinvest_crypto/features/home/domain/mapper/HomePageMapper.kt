@@ -1,9 +1,11 @@
 package com.ipekkochisarli.forinvest_crypto.features.home.domain.mapper
 
 import com.ipekkochisarli.forinvest_crypto.features.home.data.remote.dto.CoinDto
+import com.ipekkochisarli.forinvest_crypto.features.home.data.remote.dto.TrendingCoin
 import com.ipekkochisarli.forinvest_crypto.features.home.data.remote.dto.RoiDto
 import com.ipekkochisarli.forinvest_crypto.features.home.domain.uimodel.CoinUiModel
 import com.ipekkochisarli.forinvest_crypto.features.home.domain.uimodel.RoiUiModel
+import com.ipekkochisarli.forinvest_crypto.features.home.domain.uimodel.TrendingCoinUiModel
 
 fun CoinDto.toDomain(): CoinUiModel =
     CoinUiModel(
@@ -41,6 +43,22 @@ fun CoinDto.toDomain(): CoinUiModel =
             }
         } ?: "N/A"
     )
+
+fun TrendingCoin.toDomain(): TrendingCoinUiModel {
+    return TrendingCoinUiModel(
+        id = item.id,
+        coinId = item.coinId,
+        name = item.name,
+        symbol = item.symbol,
+        marketCapRank = item.marketCapRank.let { "#$it" },
+        thumb = item.thumb,
+        small = item.small,
+        large = item.large,
+        slug = item.slug,
+        score = item.score,
+        priceBtc = item.priceBtc
+    )
+}
 
 
 fun RoiDto.toDomain(): RoiUiModel =

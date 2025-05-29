@@ -5,16 +5,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ipekkochisarli.forinvest_crypto.R
 import com.ipekkochisarli.forinvest_crypto.core.base.BaseListAdapter
-import com.ipekkochisarli.forinvest_crypto.features.home.domain.uimodel.CoinUiModel
+import com.ipekkochisarli.forinvest_crypto.features.home.domain.uimodel.TrendingCoinUiModel
 import javax.inject.Inject
 
-class TrendingCoinsAdapter @Inject constructor(): BaseListAdapter<CoinUiModel>(
+class TrendingCoinsAdapter @Inject constructor(): BaseListAdapter<TrendingCoinUiModel>(
     itemsSame = { oldItem, newItem -> oldItem == newItem },
     contentsSame = { oldItem, newItem -> oldItem == newItem }) {
 
-    private var fullList: List<CoinUiModel> = emptyList()
+    private var fullList: List<TrendingCoinUiModel> = emptyList()
 
-    override fun submitList(list: List<CoinUiModel>?) {
+    override fun submitList(list: List<TrendingCoinUiModel>?) {
         fullList = list?.take(5) ?: emptyList()
         super.submitList(fullList)
     }

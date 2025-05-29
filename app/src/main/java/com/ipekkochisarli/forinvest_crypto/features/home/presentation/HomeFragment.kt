@@ -16,17 +16,16 @@ import kotlinx.coroutines.launch
 class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
 
     private val viewModel: HomeViewModel by viewModels()
-    private val coinListAdapter = CoinListAdapter()
-    private val trendingCoinListAdapter = TrendingCoinsAdapter()
+    private lateinit var coinListAdapter : CoinListAdapter
+    private lateinit var trendingCoinListAdapter : TrendingCoinsAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        collectPageState()
         setupRecyclerViews()
+        collectPageState()
+        viewModel.getData()
 
-        viewModel.getCoinList()
-        viewModel.getTrendingCoins()
     }
 
     private fun collectPageState() {
@@ -39,11 +38,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
     private fun setupRecyclerViews() {
         binding.rvCoinList.apply {
+            coinListAdapter = CoinListAdapter()
             adapter = coinListAdapter
             setHasFixedSize(true)
         }
 
         binding.rvFeaturedCoins.apply {
+            trendingCoinListAdapter = TrendingCoinsAdapter()
             adapter = trendingCoinListAdapter
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
@@ -55,7 +56,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             //!todo show loading spinner
         } else {
             coinListAdapter.submitList(state.coinList)
-            trendingCoinListAdapter.submitList(state.coinList)
+            trendingCoinListAdapter.submitList(state.trendingCoinList)
         }
     }
 }
