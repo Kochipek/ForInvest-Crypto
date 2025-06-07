@@ -19,8 +19,8 @@ class HomeViewModel @Inject constructor(
     private val trendingCoinsUseCase: GetTrendingCoinsUseCase
 ) : ViewModel() {
 
-    private val _state = MutableStateFlow(HomePageUiState())
-    val state: StateFlow<HomePageUiState> = _state
+    private val _state = MutableStateFlow(CoinListUiState())
+    val state: StateFlow<CoinListUiState> = _state
 
     init {
         refreshCoinRequest()

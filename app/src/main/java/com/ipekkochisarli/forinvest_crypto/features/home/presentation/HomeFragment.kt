@@ -49,7 +49,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         }
     }
 
-    private fun handleState(state: HomePageUiState) {
+    private fun handleState(state: CoinListUiState) {
         if (state.isLoading) {
             //!todo show loading spinner
         } else {
