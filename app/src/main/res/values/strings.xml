@@ -16,4 +16,6 @@
     <string name="crypto_app">Crypto App</string>
     <string name="logo">Logo</string>
     <string name="featured_coins">Today\'s Top 5 Coins</string>
+    <string name="popular_searches">Popular searches</string>
+    <string name="search_coins">Search Coins...</string>
 </resources>

@@ -6,6 +6,7 @@ import com.ipekkochisarli.forinvest_crypto.features.home.domain.uimodel.Trending
 import kotlinx.coroutines.flow.Flow
 
 interface HomeRepository {
-    fun getCoins(currency: String): Flow<ApiResult<List<CoinUiModel>>>
-    fun getTrendingCoins(): Flow<ApiResult<List<TrendingCoinUiModel>>>
+    suspend fun getCoins(currency: String): Flow<ApiResult<List<CoinUiModel>>>
+    suspend fun getTrendingCoins(): Flow<ApiResult<List<TrendingCoinUiModel>>>
+    fun searchCoins(query: String) : Flow<ApiResult<List<CoinUiModel>>>
 }
