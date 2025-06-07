@@ -5,12 +5,14 @@ import com.ipekkochisarli.forinvest_crypto.features.home.domain.HomeRepository
 import com.ipekkochisarli.forinvest_crypto.features.home.domain.uimodel.CoinUiModel
 import com.ipekkochisarli.forinvest_crypto.features.home.domain.mapper.toDomain
 import com.ipekkochisarli.forinvest_crypto.features.home.domain.uimodel.TrendingCoinUiModel
+import com.ipekkochisarli.forinvest_crypto.features.search.data.local.CoinLocalDataSource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class HomeRepositoryImpl @Inject constructor(
-    private val homePageApi: HomePageApi
+    private val homePageApi: HomePageApi,
 ) : HomeRepository {
 
     override suspend fun getCoins(currency: String): Flow<ApiResult<List<CoinUiModel>>> = flow {
@@ -29,9 +31,5 @@ class HomeRepositoryImpl @Inject constructor(
         } catch (e: Exception) {
             emit(ApiResult.Error("Failed to load data: ${e.message}"))
         }
-    }
-
-    override fun searchCoins(query: String): Flow<ApiResult<List<CoinUiModel>>> {
-        TODO("Not yet implemented")
     }
 }
