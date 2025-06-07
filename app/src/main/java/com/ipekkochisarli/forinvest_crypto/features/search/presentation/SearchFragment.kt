@@ -1,10 +1,9 @@
-package com.ipekkochisarli.forinvest_crypto.features.search
+package com.ipekkochisarli.forinvest_crypto.features.search.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.ipekkochisarli.forinvest_crypto.R
 import com.ipekkochisarli.forinvest_crypto.core.base.BaseFragment
 import com.ipekkochisarli.forinvest_crypto.databinding.FragmentSearchBinding

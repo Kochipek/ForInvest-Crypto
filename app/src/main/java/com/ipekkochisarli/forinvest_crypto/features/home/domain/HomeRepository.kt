@@ -8,4 +8,5 @@ import kotlinx.coroutines.flow.Flow
 interface HomeRepository {
     suspend fun getCoins(currency: String): Flow<ApiResult<List<CoinUiModel>>>
     suspend fun getTrendingCoins(): Flow<ApiResult<List<TrendingCoinUiModel>>>
+    fun searchCoins(query: String) : Flow<ApiResult<List<CoinUiModel>>>
 }

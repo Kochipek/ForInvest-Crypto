@@ -9,4 +9,5 @@
     <color name="dark_secondary">#9096A2</color>
     <color name="green">#4CAF50</color>
     <color name="transparent">#00000000</color>
+    <color name="dark_search">#4B4B4B</color>
 </resources>
