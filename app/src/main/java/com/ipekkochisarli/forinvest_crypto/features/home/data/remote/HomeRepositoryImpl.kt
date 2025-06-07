@@ -13,7 +13,7 @@ class HomeRepositoryImpl @Inject constructor(
     private val homePageApi: HomePageApi
 ) : HomeRepository {
 
-    override fun getCoins(currency: String): Flow<ApiResult<List<CoinUiModel>>> = flow {
+    override suspend fun getCoins(currency: String): Flow<ApiResult<List<CoinUiModel>>> = flow {
         try {
             val response = homePageApi.getCoinList(currency)
             emit(ApiResult.Success(response.map { it.toDomain() }))
@@ -22,12 +22,16 @@ class HomeRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun getTrendingCoins(): Flow<ApiResult<List<TrendingCoinUiModel>>> = flow {
+    override suspend fun getTrendingCoins(): Flow<ApiResult<List<TrendingCoinUiModel>>> = flow {
         try {
             val response = homePageApi.getTrendingCoins()
             emit(ApiResult.Success(response.coins.mapNotNull { it.toDomain() }))
         } catch (e: Exception) {
             emit(ApiResult.Error("Failed to load data: ${e.message}"))
         }
+    }
+
+    override fun searchCoins(query: String): Flow<ApiResult<List<CoinUiModel>>> {
+        TODO("Not yet implemented")
     }
 }
