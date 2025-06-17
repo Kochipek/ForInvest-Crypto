@@ -18,4 +18,7 @@
     <string name="featured_coins">Today\'s Top 5 Coins</string>
     <string name="popular_searches">Popular searches</string>
     <string name="search_coins">Search Coins...</string>
+    <string name="current_price">Current Price</string>
+    <string name="price_high_24h">Price High 24h</string>
+    <string name="price_low_24h">price Low 24h</string>
 </resources>

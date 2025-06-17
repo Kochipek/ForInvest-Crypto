@@ -1,6 +1,9 @@
 package com.ipekkochisarli.forinvest_crypto.features.home.data.remote
 
 import com.ipekkochisarli.forinvest_crypto.core.data.remote.ApiResult
+import com.ipekkochisarli.forinvest_crypto.features.coinDetail.data.MarketDataDto
+import com.ipekkochisarli.forinvest_crypto.features.coinDetail.data.toDomain
+import com.ipekkochisarli.forinvest_crypto.features.coinDetail.domain.CoinDetailUiModel
 import com.ipekkochisarli.forinvest_crypto.features.home.domain.HomeRepository
 import com.ipekkochisarli.forinvest_crypto.features.home.domain.uimodel.CoinUiModel
 import com.ipekkochisarli.forinvest_crypto.features.home.domain.mapper.toDomain
@@ -56,4 +59,27 @@ class HomeRepositoryImpl @Inject constructor(
             }
         }
     }
+
+    override suspend fun getCoinDetail(id: String): Flow<ApiResult<CoinDetailUiModel>> = flow {
+        try {
+            val response = homePageApi.getCoinDetail(id)
+            emit(
+                ApiResult.Success(
+                    response.body()?.toDomain() ?: throw Exception("Response body is null")
+                )
+            )
+        } catch (e: Exception) {
+            emit(ApiResult.Error("Failed to load data: ${e.message}"))
+        }
+    }
+
+    override fun getMarketChart(id: String, day: Int): Flow<ApiResult<MarketDataDto>> = flow {
+        try {
+            val response = homePageApi.getMarketCharts(id)
+            emit(ApiResult.Success(response))
+        } catch (e: Exception) {
+            emit(ApiResult.Error("Failed to load data: ${e.message}"))
+        }
+    }
+
 }

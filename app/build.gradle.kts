@@ -132,6 +132,9 @@ dependencies {
     implementation(libs.coil.compose)
     implementation(libs.coil.network.okhttp)
 
+    // chart
+    implementation (libs.mpandroidchart)
+
     implementation(libs.material.v160)
 
     implementation(libs.androidx.core.ktx)
