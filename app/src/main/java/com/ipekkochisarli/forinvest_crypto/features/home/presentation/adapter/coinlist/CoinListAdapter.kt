@@ -15,12 +15,20 @@ class CoinListAdapter @Inject constructor(): BaseListAdapter<CoinUiModel>(
                 oldItem.priceChangePercentage24h == newItem.priceChangePercentage24h
     }
 ) {
+
+    var onItemClick: ((CoinUiModel) -> Unit)? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, inflater: LayoutInflater, viewType: Int): CoinListViewHolder {
         val view = inflater.inflate(R.layout.list_item_coins, parent, false)
         return CoinListViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as CoinListViewHolder).bind(getItem(position))
+        val coin = getItem(position)
+        (holder as CoinListViewHolder).bind(coin)
+
+        holder.itemView.setOnClickListener {
+            onItemClick?.invoke(coin)
+        }
     }
 }

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ipekkochisarli.forinvest_crypto.core.base.BaseFragment
 import com.ipekkochisarli.forinvest_crypto.databinding.FragmentHomeBinding
@@ -39,6 +40,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             coinListAdapter = CoinListAdapter()
             adapter = coinListAdapter
             setHasFixedSize(true)
+        }
+
+        coinListAdapter.onItemClick = { coin ->
+            val action = HomeFragmentDirections.actionHomeFragmentToCoinDetailFragment(
+                coin.id ?: "",
+            )
+            findNavController().navigate(action)
         }
 
         binding.rvFeaturedCoins.apply {
