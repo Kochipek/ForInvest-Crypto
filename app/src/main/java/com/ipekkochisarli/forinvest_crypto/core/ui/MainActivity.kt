@@ -49,6 +49,10 @@ class MainActivity : AppCompatActivity() {
                     binding.bottomNav.gone()
                     binding.toolbar.gone()
                 }
+                R.id.coinDetailFragment -> {
+                    binding.toolbar.gone()
+                    binding.bottomNav.gone()
+                }
                 else -> {
                     binding.bottomNav.visible()
                     binding.toolbar.visible()

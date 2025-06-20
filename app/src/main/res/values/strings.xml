@@ -18,4 +18,17 @@
     <string name="featured_coins">Today\'s Top 5 Coins</string>
     <string name="popular_searches">Popular searches</string>
     <string name="search_coins">Search Coins...</string>
+    <string name="current_price">Current Price</string>
+    <string name="price_high_24h">Price High 24h</string>
+    <string name="price_low_24h">price Low 24h</string>
+
+    <string name="market_cap_rank">Market Cap Rank: #%1$s</string>
+    <string name="hashing_algorithm">Hashing Algorithm: %1$s</string>
+    <string name="block_time">Block Time: %1$s mins</string>
+    <string name="sentiment_up">👍 %1$s%%</string>
+    <string name="sentiment_down">👎 %1$s%%</string>
+    <string name="country_origin">Country Origin: %1$s</string>
+    <string name="genesis_date">Genesis Date: %1$s</string>
+    <string name="btn_ok">Tamam</string>
+
 </resources>

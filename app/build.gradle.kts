@@ -4,6 +4,7 @@ plugins {
     id("com.google.dagger.hilt.android")
     id("kotlin-parcelize")
     id("com.google.devtools.ksp")
+    id("androidx.navigation.safeargs")
 }
 
 android {
@@ -131,6 +132,9 @@ dependencies {
     //coil
     implementation(libs.coil.compose)
     implementation(libs.coil.network.okhttp)
+
+    // chart
+    implementation (libs.mpandroidchart)
 
     implementation(libs.material.v160)
 
