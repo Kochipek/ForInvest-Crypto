@@ -1,6 +1,7 @@
 package com.ipekkochisarli.forinvest_crypto.features.home.domain
 
 import com.ipekkochisarli.forinvest_crypto.core.data.remote.ApiResult
+import com.ipekkochisarli.forinvest_crypto.features.coinDetail.data.ChartPoint
 import com.ipekkochisarli.forinvest_crypto.features.coinDetail.data.MarketDataDto
 import com.ipekkochisarli.forinvest_crypto.features.coinDetail.domain.CoinDetailUiModel
 import com.ipekkochisarli.forinvest_crypto.features.home.domain.uimodel.CoinUiModel
@@ -12,5 +13,5 @@ interface HomeRepository {
     suspend fun getTrendingCoins(): Flow<ApiResult<List<TrendingCoinUiModel>>>
     fun searchCoins(query: String) : Flow<ApiResult<List<CoinUiModel>>>
     suspend fun getCoinDetail(id: String): Flow<ApiResult<CoinDetailUiModel>>
-    fun getMarketChart(id: String, day: Int): Flow<ApiResult<MarketDataDto>>
+    fun getMarketChart(id: String, day: Int): Flow<ApiResult<List<ChartPoint>>>
 }

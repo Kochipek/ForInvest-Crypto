@@ -61,6 +61,28 @@ data class CurrentPriceDto(
     val usd: Double?
 )
 
+data class ChartPoint(
+    val timestamp: Long,
+    val price: Double
+)
+
+data class CoinMarketChart(
+    val prices: List<List<Double>>,
+    @SerializedName("market_caps")
+    val marketCaps: List<List<Double>>,
+    @SerializedName("total_volumes")
+    val totalVolumes: List<List<Double>>
+)
+
+fun CoinMarketChart.toDomain(): List<ChartPoint> {
+    return prices.map { priceEntry ->
+        ChartPoint(
+            timestamp = priceEntry[0].toLong(),
+            price = priceEntry[1]
+        )
+    }
+}
+
 fun CoinDetailDto.toDomain(): CoinDetailUiModel = CoinDetailUiModel(
     blockTimeInMinutes = blockTimeInMinutes,
     categories = categories,
@@ -77,12 +99,12 @@ fun CoinDetailDto.toDomain(): CoinDetailUiModel = CoinDetailUiModel(
     name = name,
     previewListing = previewListing,
     sentimentVotesDownPercentage = sentimentVotesDownPercentage ?: 0.0,
-    sentimentVotesUpPercentage = ((sentimentVotesUpPercentage ?: 0.0) / 100).toFloat(),
+    sentimentVotesUpPercentage = (sentimentVotesUpPercentage ?: 0.0).toFloat(),
     symbol = symbol,
     watchlistPortfolioUsers = watchlistPortfolioUsers,
     webSlug = webSlug,
-    sentimentVotesDownPercentageFormatted = (sentimentVotesDownPercentage ?: 0.0) * 100,
-    sentimentVotesUpPercentageFormatted = (sentimentVotesUpPercentage ?: 0.0) * 100,
+    sentimentVotesDownPercentageFormatted = sentimentVotesDownPercentage ?: 0.0,
+    sentimentVotesUpPercentageFormatted = sentimentVotesUpPercentage ?: 0.0,
     currentPriceFormatted = "%.2f".format(marketData?.currentPrice?.usd ?: 0.0),
     marketCapRankFormatted = "#${marketCapRank ?: "N/A"}"
 )

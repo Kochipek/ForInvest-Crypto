@@ -1,6 +1,7 @@
 package com.ipekkochisarli.forinvest_crypto.features.home.data.remote
 
 import com.ipekkochisarli.forinvest_crypto.features.coinDetail.data.CoinDetailDto
+import com.ipekkochisarli.forinvest_crypto.features.coinDetail.data.CoinMarketChart
 import com.ipekkochisarli.forinvest_crypto.features.coinDetail.data.MarketDataDto
 import com.ipekkochisarli.forinvest_crypto.features.coinDetail.domain.CoinDetailUiModel
 import retrofit2.http.Query
@@ -27,12 +28,12 @@ interface HomePageApi {
         @Query("vs_currency") vsCurrency: String = "usd",
         @Query("days") days: Int = 7,
         @Query("interval") interval: String = "daily"
-    ): MarketDataDto
+    ): CoinMarketChart
 
     companion object {
-        const val COIN_DETAIL = "\"coins/{id}\""
+        const val COIN_DETAIL = "api/v3/coins/{id}"
         const val END_POINT_GET_COIN_LIST = "api/v3/coins/markets?"
         const val END_POINT_GET_TRENDING_COINS = "api/v3/search/trending"
-        const val MARKET_CHARTS = "coins/{id}/market_chart"
+        const val MARKET_CHARTS = "api/v3/coins/{id}/market_chart"
     }
 }
