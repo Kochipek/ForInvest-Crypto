@@ -1,12 +1,14 @@
 package com.ipekkochisarli.forinvest_crypto.core.di
 
+import com.facebook.flipper.plugins.network.FlipperOkhttpInterceptor
+import com.facebook.flipper.plugins.network.NetworkFlipperPlugin
 import com.ipekkochisarli.forinvest_crypto.BuildConfig
+import com.ipekkochisarli.forinvest_crypto.core.data.remote.FlipperHolder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -17,18 +19,17 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
-        return HttpLoggingInterceptor().apply {
-            level = HttpLoggingInterceptor.Level.BODY
-        }
+    fun provideNetworkFlipperPlugin(): NetworkFlipperPlugin {
+        return FlipperHolder.networkFlipperPlugin
     }
-
     @Provides
     @Singleton
-    fun provideOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
-        return OkHttpClient.Builder()
-            .addInterceptor(httpLoggingInterceptor)
-            .build()
+    fun provideOkHttpClient(networkFlipperPlugin: NetworkFlipperPlugin): OkHttpClient {
+        val builder = OkHttpClient.Builder()
+        if (BuildConfig.DEBUG) {
+            builder.addNetworkInterceptor(FlipperOkhttpInterceptor(networkFlipperPlugin))
+        }
+        return builder.build()
     }
 
     @Provides

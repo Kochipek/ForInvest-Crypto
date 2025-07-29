@@ -138,6 +138,11 @@ dependencies {
 
     implementation(libs.material.v160)
 
+    debugImplementation(libs.flipper)
+    debugImplementation (libs.soloader)
+    debugImplementation(libs.flipper.network.plugin)
+    debugImplementation(libs.facebook.flipper.retrofit2.protobuf.plugin)
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
