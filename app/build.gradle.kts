@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.compose)
     id("com.google.dagger.hilt.android")
     id("kotlin-parcelize")
     id("com.google.devtools.ksp")
@@ -23,26 +24,10 @@ android {
 
     buildTypes {
         debug {
-            buildConfigField(
-                "String",
-                "BASE_URL_COINS",
-                "\"https://api.coingecko.com/\""
-            )
-            buildConfigField(
-                "String",
-                "BASE_URL_NEWS",
-                "\"https://newsapi.org/\""
-            )
-            buildConfigField(
-                "Boolean",
-                "DEBUG_MODE",
-                "true"
-            )
-            buildConfigField(
-                "String",
-                "NEWS_API_KEY",
-                "\"${properties["NEWS_API_KEY"]}\""
-            )
+            buildConfigField("String", "BASE_URL_COINS", "\"https://api.coingecko.com/\"")
+            buildConfigField("String", "BASE_URL_NEWS", "\"https://newsapi.org/\"")
+            buildConfigField("Boolean", "DEBUG_MODE", "true")
+            buildConfigField("String", "NEWS_API_KEY", "\"${properties["NEWS_API_KEY"]}\"")
         }
 
         release {
@@ -51,26 +36,10 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            buildConfigField(
-                "String",
-                "BASE_URL_COINS",
-                "\"https://api.coingecko.com/\""
-            )
-            buildConfigField(
-                "String",
-                "BASE_URL_NEWS",
-                "\"https://newsapi.org/\""
-            )
-            buildConfigField(
-                "Boolean",
-                "DEBUG_MODE",
-                "false"
-            )
-            buildConfigField(
-                "String",
-                "NEWS_API_KEY",
-                "\"${properties["NEWS_API_KEY"]}\""
-            )
+            buildConfigField("String", "BASE_URL_COINS", "\"https://api.coingecko.com/\"")
+            buildConfigField("String", "BASE_URL_NEWS", "\"https://newsapi.org/\"")
+            buildConfigField("Boolean", "DEBUG_MODE", "false")
+            buildConfigField("String", "NEWS_API_KEY", "\"${properties["NEWS_API_KEY"]}\"")
         }
     }
 
@@ -78,37 +47,47 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+
     kotlinOptions {
         jvmTarget = "11"
     }
 
-    buildFeatures{
+    buildFeatures {
+        compose = true
         viewBinding = true
         buildConfig = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.15"
     }
 }
 
 dependencies {
-    //retrofit
+    // Retrofit & OkHttp
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
+    implementation(platform(libs.okhttp.bom))
+    implementation(libs.okhttp)
+    implementation(libs.logging.interceptor)
 
-    //coroutines
+    // Kotlin Coroutines
     implementation(libs.kotlinx.coroutines.android)
 
-    //hilt
+    // Hilt
     implementation(libs.hilt.android)
-    implementation(libs.androidx.navigation.runtime.ktx)
-    implementation(libs.androidx.paging.runtime.ktx)
-
-    implementation(libs.androidx.navigation.fragment)
+    implementation(libs.androidx.material3.android)
     ksp(libs.hilt.android.compiler)
+    implementation(libs.androidx.hilt.navigation.compose)
 
-    //roomdb
+    // Room
     implementation(libs.androidx.room.runtime)
     ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
     implementation(libs.androidx.room.paging)
+
+    // Paging
+    implementation(libs.androidx.paging.runtime.ktx)
 
     //splash
     implementation(libs.androidx.core.splashscreen)
@@ -118,7 +97,6 @@ dependencies {
     //navigation
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
-
     //viewpager2
     implementation(libs.androidx.viewpager2)
     //dots indicator
@@ -129,23 +107,39 @@ dependencies {
     implementation(libs.okhttp)
     implementation(libs.logging.interceptor)
 
-    //coil
+    // Coil
     implementation(libs.coil.compose)
     implementation(libs.coil.network.okhttp)
 
-    // chart
-    implementation (libs.mpandroidchart)
+    // MPAndroidChart
+    implementation(libs.mpandroidchart)
 
+    // Compose
+    implementation(libs.androidx.compose.ui)
+    implementation(libs.androidx.compose.material)
+    implementation(libs.androidx.compose.ui.tooling.preview)
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation(libs.androidx.navigation.compose)
+    debugImplementation(libs.androidx.compose.ui.tooling)
+
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+
+    // Material
     implementation(libs.material.v160)
+    implementation(libs.material)
 
+    // SplashScreen
+    implementation(libs.androidx.core.splashscreen)
+
+    // Flipper (Debug only)
     debugImplementation(libs.flipper)
-    debugImplementation (libs.soloader)
+    debugImplementation(libs.soloader)
     debugImplementation(libs.flipper.network.plugin)
     debugImplementation(libs.facebook.flipper.retrofit2.protobuf.plugin)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
-    implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     testImplementation(libs.junit)

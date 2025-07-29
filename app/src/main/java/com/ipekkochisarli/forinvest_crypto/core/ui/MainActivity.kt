@@ -1,64 +1,85 @@
 package com.ipekkochisarli.forinvest_crypto.core.ui
 
 import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.navigation.NavController
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.setupWithNavController
-import com.ipekkochisarli.forinvest_crypto.R
-import com.ipekkochisarli.forinvest_crypto.databinding.ActivityMainBinding
-import com.ipekkochisarli.forinvest_crypto.util.extensions.gone
-import com.ipekkochisarli.forinvest_crypto.util.extensions.visible
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material3.BottomAppBar
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
+import com.ipekkochisarli.forinvest_crypto.navigation.AppNavHost
+import com.ipekkochisarli.forinvest_crypto.ui.theme.DarkOutline
 import dagger.hilt.android.AndroidEntryPoint
+import com.ipekkochisarli.forinvest_crypto.ui.theme.ForInvestCryptoTheme
+import com.ipekkochisarli.forinvest_crypto.ui.theme.PrimaryBlue
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
-    private lateinit var navController: NavController
-
+class MainActivity : ComponentActivity() {
+    @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
         enableEdgeToEdge()
-        setContentView(binding.root)
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+        setContent {
+            ForInvestCryptoTheme {
+                val navController = rememberNavController()
 
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
-        navController = navHostFragment.navController
+                val navBackStackEntry by navController.currentBackStackEntryAsState()
+                val currentDestination = navBackStackEntry?.destination
 
-        // setup bottom navigation
-        binding.bottomNav.setupWithNavController(navController)
-
-        binding.ivProfile.setOnClickListener {
-            navController.navigate(R.id.profileFragment)
-        }
-
-        navController.addOnDestinationChangedListener { _, destination, _ ->
-            when (destination.id) {
-                R.id.profileFragment,
-                R.id.onBoardingFragment -> {
-                    binding.bottomNav.gone()
-                    binding.toolbar.gone()
+                val showBottomBar = when (currentDestination?.route) {
+                    "profile", "onBoarding", "coinDetail/{coinId}" -> false
+                    else -> true
                 }
-                R.id.coinDetailFragment -> {
-                    binding.toolbar.gone()
-                    binding.bottomNav.gone()
-                }
-                else -> {
-                    binding.bottomNav.visible()
-                    binding.toolbar.visible()
+
+                Scaffold(bottomBar = {
+                    if (showBottomBar) {
+                        BottomAppBar {
+                            BottomNavigationItem(
+                                selected = currentDestination?.route == "home",
+                                onClick = { navController.navigate("home") },
+                                icon = {
+                                    Icon(
+                                        Icons.Default.Home,
+                                        contentDescription = "Home",
+                                        tint = if (currentDestination?.route == "home") PrimaryBlue else DarkOutline
+                                    )
+                                },
+                                label = {
+                                    Text(
+                                        "Home",
+                                        color = if (currentDestination?.route == "home") PrimaryBlue else DarkOutline
+                                    )
+                                },
+                                alwaysShowLabel = true,
+                                selectedContentColor = PrimaryBlue,
+                                unselectedContentColor = DarkOutline,
+                            )
+
+                        }
+                    }
+                }, topBar = {
+                    if (showBottomBar) {
+                        TopAppBar(title = { Text("ForInvestCrypto") })
+                    }
+                }) { innerPadding ->
+                    Box(modifier = Modifier.padding(innerPadding)) {
+                        AppNavHost(navController)
+                    }
                 }
             }
         }
-
     }
 }
