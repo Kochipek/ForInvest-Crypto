@@ -10,6 +10,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.ipekkochisarli.forinvest_crypto.core.ui.ScreenNames
 import com.ipekkochisarli.forinvest_crypto.features.home.presentation.HomeScreen
+import com.ipekkochisarli.forinvest_crypto.features.search.presentation.SearchScreen
 
 @Composable
 fun AppNavHost(navController: NavHostController = rememberNavController()) {
@@ -17,6 +18,12 @@ fun AppNavHost(navController: NavHostController = rememberNavController()) {
 
         composable(ScreenNames.Home.route) {
             HomeScreen(onCoinClick = { coinId ->
+                navController.navigate(ScreenNames.CoinDetail.createRoute(coinId))
+            })
+        }
+
+        composable(ScreenNames.Search.route) {
+            SearchScreen(onCoinClick = { coinId ->
                 navController.navigate(ScreenNames.CoinDetail.createRoute(coinId))
             })
         }

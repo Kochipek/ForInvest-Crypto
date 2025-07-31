@@ -5,4 +5,5 @@ sealed class ScreenNames(val route: String) {
     object CoinDetail : ScreenNames("coinDetail/{coinId}") {
         fun createRoute(coinId: String) = "coinDetail/$coinId"
     }
+    object Search : ScreenNames("search")
 }

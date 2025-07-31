@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -48,26 +49,40 @@ class MainActivity : ComponentActivity() {
                     if (showBottomBar) {
                         BottomAppBar {
                             BottomNavigationItem(
-                                selected = currentDestination?.route == "home",
-                                onClick = { navController.navigate("home") },
+                                selected = currentDestination?.route == ScreenNames.Home.route,
+                                onClick = { navController.navigate(ScreenNames.Home.route) },
                                 icon = {
                                     Icon(
-                                        Icons.Default.Home,
+                                        imageVector = Icons.Default.Home,
                                         contentDescription = "Home",
-                                        tint = if (currentDestination?.route == "home") PrimaryBlue else DarkOutline
+                                        tint = if (currentDestination?.route == ScreenNames.Home.route) PrimaryBlue else DarkOutline
                                     )
                                 },
                                 label = {
                                     Text(
                                         "Home",
-                                        color = if (currentDestination?.route == "home") PrimaryBlue else DarkOutline
+                                        color = if (currentDestination?.route == ScreenNames.Home.route) PrimaryBlue else DarkOutline
                                     )
-                                },
-                                alwaysShowLabel = true,
-                                selectedContentColor = PrimaryBlue,
-                                unselectedContentColor = DarkOutline,
+                                }
                             )
 
+                            BottomNavigationItem(
+                                selected = currentDestination?.route == ScreenNames.Search.route,
+                                onClick = { navController.navigate(ScreenNames.Search.route) },
+                                icon = {
+                                    Icon(
+                                        imageVector = Icons.Default.Search,
+                                        contentDescription = "Search",
+                                        tint = if (currentDestination?.route == ScreenNames.Search.route) PrimaryBlue else DarkOutline
+                                    )
+                                },
+                                label = {
+                                    Text(
+                                        "Search",
+                                        color = if (currentDestination?.route == ScreenNames.Search.route) PrimaryBlue else DarkOutline
+                                    )
+                                }
+                            )
                         }
                     }
                 }, topBar = {
