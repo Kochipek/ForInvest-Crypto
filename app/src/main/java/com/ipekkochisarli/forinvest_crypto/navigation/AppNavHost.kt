@@ -1,5 +1,6 @@
 package com.ipekkochisarli.forinvest_crypto.navigation
 
+import CoinDetailScreen
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -25,7 +26,10 @@ fun AppNavHost(navController: NavHostController = rememberNavController()) {
             arguments = listOf(navArgument("coinId") { type = NavType.StringType })
         ) { backStackEntry ->
             val coinId = backStackEntry.arguments?.getString("coinId") ?: ""
-            //todo CoinDetailScreen(coinId = coinId)
+            CoinDetailScreen(
+                coinId = coinId,
+                onBackClick = { navController.popBackStack() }
+            )
         }
     }
 }

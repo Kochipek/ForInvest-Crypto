@@ -23,7 +23,9 @@ class HomeViewModel @Inject constructor(
     val state: StateFlow<CoinListUiState> = _state
 
     init {
-        refreshCoinRequest()
+        viewModelScope.launch {
+            getCoinList()
+        }
     }
 
     private fun refreshCoinRequest() {
